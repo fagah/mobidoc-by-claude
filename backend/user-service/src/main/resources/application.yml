@@ -1,0 +1,32 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users
+    username: mobidoc
+    password: mobidoc123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: mobidoc
+  resource: user-service
+  public-client: true
+  bearer-only: true
+  principal-attribute: preferred_username
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.mobidoc: DEBUG
