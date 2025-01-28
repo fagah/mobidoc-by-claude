@@ -3,23 +3,22 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15-alpine
+    container_name: mobidoc-postgres
     environment:
+      POSTGRES_DB: mobidoc
       POSTGRES_USER: mobidoc
       POSTGRES_PASSWORD: mobidoc123
-      POSTGRES_MULTIPLE_DATABASES: keycloak,users,consultations,evaluations,notifications,locations,stats
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    networks:
-      - mobidoc-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   keycloak:
-    image: quay.io/keycloak/keycloak:22.0.1
-    command: start-dev
+    image: quay.io/keycloak/keycloak:22.0
+    container_name: mobidoc-keycloak
     environment:
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_URL: jdbc:postgresql://postgres/keycloak
       KC_DB_USERNAME: mobidoc
       KC_DB_PASSWORD: mobidoc123
       KEYCLOAK_ADMIN: admin
@@ -28,12 +27,7 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-    networks:
-      - mobidoc-network
+    command: start-dev
 
 volumes:
   postgres_data:
-
-networks:
-  mobidoc-network:
-    driver: bridge

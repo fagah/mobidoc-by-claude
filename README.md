@@ -1,57 +1,57 @@
 # MobiDoc
 
-Application de gestion de consultations médicales à domicile
+Application de gestion de documents médicaux avec téléconsultation.
 
 ## Architecture
 
-Le projet est composé de :
+Le projet est divisé en plusieurs parties :
 
-### Backend (Spring Boot Microservices)
-- `user-service` : Gestion des utilisateurs et profils
-- `auth-service` : Service d'authentification (Keycloak)
-- `consultation-service` : Gestion des consultations
-- `notification-service` : Gestion des notifications
-- `evaluation-service` : Gestion des évaluations
-- `location-service` : Service de géolocalisation
-- `stats-service` : Service de statistiques
+### Backend (Spring Boot)
+- API REST
+- Microservices architecture
+- PostgreSQL pour la persistance
+- Keycloak pour l'authentification
 
-### Frontend
-- `web-app` : Application web Angular (SPA)
-- `mobile-app` : Application mobile Flutter avec GetX
+### Frontend Web (Angular)
+- Single Page Application
+- Interface utilisateur moderne et responsive
+- Intégration avec Keycloak
 
-### Infrastructure
-- `docker` : Fichiers Docker et docker-compose
-- `k8s` : Configurations Kubernetes
+### Application Mobile (Flutter)
+- Framework GetX pour la gestion d'état
+- Support Android et iOS
+- Interface native et performante
+
+## Structure du Projet
+
+```
+├── backend/               # Services Spring Boot
+├── frontend/              # Application Angular
+├── mobile/                # Application Flutter
+├── docker/                # Configuration Docker
+└── docs/                  # Documentation
+```
 
 ## Prérequis
 
 - Java 17+
 - Node.js 18+
 - Flutter 3.x
-- Docker & Docker Compose
+- Docker et Docker Compose
 - PostgreSQL 15+
-- Keycloak 22+
 
 ## Installation
 
-```bash
-# Cloner le repository
-git clone https://github.com/fagah/mobidoc-by-claude.git
+1. Cloner le repository
+2. Lancer la base de données et Keycloak avec Docker Compose
+3. Démarrer le backend Spring Boot
+4. Lancer le frontend Angular
+5. Compiler l'application mobile Flutter
 
-# Lancer l'infrastructure
-cd docker
-docker-compose up -d
+## Documentation
 
-# Lancer les services backend
-./mvnw spring-boot:run  # Pour chaque service
-
-# Lancer l'application web
-cd web-app
-npm install
-ng serve
-
-# Lancer l'application mobile
-cd mobile-app
-flutter pub get
-flutter run
-```
+Consulter le dossier `docs/` pour plus de détails sur :
+- L'architecture détaillée
+- Les guides d'installation
+- Les API endpoints
+- Les procédures de déploiement
